@@ -1,11 +1,15 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('YOUR_MONGODB_CONNECTION_STRING');
+    await mongoose.connect(process.env.MONGO_CONNECTION_STRING as string);
     console.log('MongoDB connected...');
   } catch (err) {
     if (err instanceof Error) {
+        console.log("here")
       console.error(err.message);
     } else {
       console.error('Unexpected error', err);

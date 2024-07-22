@@ -1,24 +1,24 @@
 import { Router } from 'express';
-import Players from '../models/players';
+import Match from '../models/matches';
 
 const router = Router();
 
-
+// Create a new match
 router.post('/', async (req, res) => {
-  const { userName, trophies, email, age, createdAt } = req.body;
+  const { player1, player2, winner, time, duration } = req.body;
 
   try {
-    const player = new Players({
-        userName,
-        trophies,
-        email,
-        age,
-        createdAt
+    const match = new Match({
+      player1,
+      player2,
+      winner,
+      time,
+      duration
     });
 
-    await player.save();
+    await match.save();
 
-    res.json(player);
+    res.json(match);
   } catch (err) {
     if (err instanceof Error) {
       console.error(err.message);
